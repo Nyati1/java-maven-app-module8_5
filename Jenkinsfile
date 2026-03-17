@@ -1,41 +1,46 @@
-//def gv
+def gv
 
-pipeline {   
+pipeline {
     agent any
-    tools {
-        maven 'Maven'
+    parameters {
+        choice(name: 'VERSION', choices: ['1.1.0','1.2.0','1.3.0'], description:'')
+        booleanParam(name: 'executeTests', defaultValue: true, description:'')
     }
+
     stages {
-        stage("init") {
+        stage('Init') {
             steps {
                 script {
+                    // This line is required to link gv to your groovy file
                     gv = load "script.groovy"
                 }
             }
         }
-        stage("build jar") {
+        stage('Build') {
             steps {
                 script {
-                    gv.buildJar()
-
+                    gv.buildApp()
                 }
             }
         }
-
-        stage("build image") {
-            steps {
-                script {
-                    gv.buildImage()
+        stage('Test') {
+             when {
+                expression {
+                    params.executeTests
                 }
             }
+            steps {
+                script {
+                    gv.testApp()
+                }
+            }  
         }
-
-        stage("deploy") {
+         stage('Deploy') {
             steps {
                 script {
                     gv.deployApp()
                 }
             }
-        }               
+        }
     }
-} 
+}
