@@ -11,7 +11,7 @@ pipeline {
         stage('Build') {
           
             steps {
-                scipt{
+                script{
                     def gv = load "script.groovy"
 
                     gv.buildApp()
@@ -37,7 +37,7 @@ pipeline {
          stage('Deploy') {
           
             steps {
-                scipt{
+                script{
                     def gv = load "script.groovy"
 
                     gv.deployApp()
