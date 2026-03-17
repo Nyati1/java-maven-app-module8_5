@@ -35,8 +35,8 @@ pipeline {
                  message "Select environment to deploy to"
                  ok "Done"
                  parameters {
-                         choice(name: 'ENV-1', choices: ['DEV','STAGING','PROD'], description:'')
-                         choice(name: 'ENV-2', choices: ['DEV','STAGING','PROD'], description:'')
+                         choice(name: 'ENV1', choices: ['DEV','STAGING','PROD'], description:'')
+                         choice(name: 'ENV2', choices: ['DEV','STAGING','PROD'], description:'')
                  }
              }
             steps {
@@ -44,8 +44,8 @@ pipeline {
                     def gv = load "script.groovy"
 
                     gv.deployApp()
-                    echo "Deploying to ${ENV-1}"
-                    echo "Deploying to ${ENV-2}"
+                    echo "Deploying to ${ENV1}"
+                    echo "Deploying to ${ENV2}"
                 }
             }
         }
