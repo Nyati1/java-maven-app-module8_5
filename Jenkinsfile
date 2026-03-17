@@ -13,10 +13,8 @@ pipeline {
             steps {
                 script{
                     def gv = load "script.groovy"
-
                     gv.buildApp()
                 }
-                
             }
         }
         stage('Test') {
@@ -25,11 +23,9 @@ pipeline {
                         params.executeTests
                     }
                 }
-          
             steps {
                   script{
                       def gv = load "script.groovy"
-
                       gv.testApp()
                 }
             }  
@@ -39,21 +35,19 @@ pipeline {
                  message "Select environment to deploy to"
                  ok "Done"
                  parameters {
-        choice(name: 'ENV', choices: ['DEV','STAGING','PROD'], description:'')
-        
+                         choice(name: 'ENV-1', choices: ['DEV','STAGING','PROD'], description:'')
+                          choice(name: 'ENV-2', choices: ['DEV','STAGING','PROD'], description:'')
                  }
-                 
              }
-          
             steps {
                 script{
                     def gv = load "script.groovy"
 
                     gv.deployApp()
-                    echo "Deploying to ${ENV}"
+                    echo "Deploying to ${ENV-1}"
+                    echo "Deploying to ${ENV-2}"
                 }
             }
-          
         }
     }
 }
