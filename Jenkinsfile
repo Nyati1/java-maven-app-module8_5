@@ -36,7 +36,7 @@ pipeline {
                  ok "Done"
                  parameters {
                          choice(name: 'ENV-1', choices: ['DEV','STAGING','PROD'], description:'')
-                          choice(name: 'ENV-2', choices: ['DEV','STAGING','PROD'], description:'')
+                         choice(name: 'ENV-2', choices: ['DEV','STAGING','PROD'], description:'')
                  }
              }
             steps {
