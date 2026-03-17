@@ -1,4 +1,4 @@
-def gv
+@Field def gv
 
 pipeline {
     agent any
@@ -11,7 +11,6 @@ pipeline {
         stage('Init') {
             steps {
                 script {
-                    // This line links gv to your groovy file
                     gv = load "script.groovy"
                 }
             }
@@ -24,7 +23,7 @@ pipeline {
             }
         }
         stage('Test') {
-             when {
+            when {
                 expression {
                     params.executeTests
                 }
@@ -35,7 +34,7 @@ pipeline {
                 }
             }  
         }
-         stage('Deploy') {
+        stage('Deploy') {
             steps {
                 script {
                     gv.deployApp()
