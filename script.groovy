@@ -1,6 +1,27 @@
-def buildJar() {
+def buildApp() {
     echo 'building the application...'
-    sh 'mvn package'
+  
+}
+
+def testApp() {
+    echo 'testing the application...'
+   
+}
+
+def deployApp() {
+    echo 'deploying the application...'
+    echo "deploying version ${params.VERSION}"
+  
+}
+
+
+
+
+
+/*def buildJar() {
+    echo 'building the application...'
+    // Build the module explicitly so artifacts land in java-maven-app/target
+    sh 'mvn -f java-maven-app/pom.xml clean package'
 }
 
 def buildImage() {
@@ -14,6 +35,6 @@ def buildImage() {
 
 def deployApp() {
     echo 'deploying the application...'
-}
+}*/
 
 return this
