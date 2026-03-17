@@ -1,5 +1,3 @@
-@Field def gv
-
 pipeline {
     agent any
     parameters {
@@ -8,16 +6,11 @@ pipeline {
     }
 
     stages {
-        stage('Init') {
-            steps {
-                script {
-                    gv = load "script.groovy"
-                }
-            }
-        }
+        
         stage('Build') {
             steps {
                 script {
+                    def gv = load "script.groovy"
                     gv.buildApp()
                 }
             }
@@ -30,6 +23,7 @@ pipeline {
             }
             steps {
                 script {
+                    def gv = load "script.groovy"
                     gv.testApp()
                 }
             }  
@@ -37,6 +31,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
+                    def gv = load "script.groovy"
                     gv.deployApp()
                 }
             }
