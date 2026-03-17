@@ -1,3 +1,5 @@
+def gv
+
 pipeline {
     agent any
     parameters {
@@ -9,7 +11,11 @@ pipeline {
         stage('Build') {
           
             steps {
-                echo 'This is the building stage'
+                scipt{
+
+                    gv.buildApp()
+                }
+                
             }
         }
         stage('Test') {
@@ -20,15 +26,19 @@ pipeline {
                 }
           
             steps {
-                echo 'This is the testing stage'
-               
+                  scipt{
+
+                    gv.testApp()
+                }
             }  
         }
          stage('Deploy') {
           
             steps {
-                echo 'This is the deploying stage'
-                echo "deploying version ${params.VERSION}"
+                scipt{
+
+                    gv.deployApp()
+                }
             }
           
         }

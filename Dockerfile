@@ -2,7 +2,9 @@ FROM amazoncorretto:17-alpine-jdk
 
 EXPOSE 8080
 
-COPY ./target/java-maven-app-*.jar /usr/app/
+# When building from the repository root as build context, the module jar lives under java-maven-app/target
+COPY ./java-maven-app/target/java-maven-app-*.jar /usr/app/
 WORKDIR /usr/app
 
-CMD java -jar java-maven-app-*.jar
+# Use shell form so a wildcard jar name will be resolved at container start
+CMD ["sh", "-c", "java -jar java-maven-app-*.jar"]
