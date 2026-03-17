@@ -5,5 +5,4 @@ EXPOSE 8080
 COPY ./java-maven-app/target/java-maven-app-*.jar /usr/app/
 WORKDIR /usr/app
 
-# Use shell so the wildcard can be expanded to the actual jar filename produced by the module build
-ENTRYPOINT ["sh", "-c", "java -jar java-maven-app-*.jar"]
+ENTRYPOINT ["java", "-jar", "java-maven-app-1.0-SNAPSHOT.jar"]
