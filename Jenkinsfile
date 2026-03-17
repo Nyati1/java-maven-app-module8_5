@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-=======
 def gv
 
->>>>>>> e7e580642daaed25028d8c4d7ef675e0fa63ac8d
 pipeline {
     agent any
     parameters {
@@ -11,23 +8,10 @@ pipeline {
     }
 
     stages {
-<<<<<<< HEAD
-        stage('Build') {
-          
-            steps {
-                echo 'This is the building stage'
-            }
-        }
-        stage('Test') {
-             when {
-                    expression{
-                        params.executeTests
-                    }
-=======
         stage('Init') {
             steps {
                 script {
-                    // This line is required to link gv to your groovy file
+                    // This line links gv to your groovy file
                     gv = load "script.groovy"
                 }
             }
@@ -36,27 +20,9 @@ pipeline {
             steps {
                 script {
                     gv.buildApp()
->>>>>>> e7e580642daaed25028d8c4d7ef675e0fa63ac8d
                 }
-          
-            steps {
-                echo 'This is the testing stage'
-               
-            }  
-        }
-<<<<<<< HEAD
-         stage('Deploy') {
-          
-            steps {
-                echo 'This is the deploying stage'
-                echo "deploying version ${params.VERSION}"
             }
-          
         }
-    }
-}
-    
-=======
         stage('Test') {
              when {
                 expression {
@@ -78,4 +44,3 @@ pipeline {
         }
     }
 }
->>>>>>> e7e580642daaed25028d8c4d7ef675e0fa63ac8d
