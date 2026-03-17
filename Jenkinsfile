@@ -35,12 +35,22 @@ pipeline {
             }  
         }
          stage('Deploy') {
+             input{
+                 message "Select environment to deploy to"
+                 ok "Done"
+                 parameters {
+        choice(name: 'ENV', choices: ['DEV','STAGING','PROD'], description:'')
+        
+                 }
+                 
+             }
           
             steps {
                 script{
                     def gv = load "script.groovy"
 
                     gv.deployApp()
+                    echo "Deploying to ${ENV}"
                 }
             }
           
