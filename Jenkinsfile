@@ -1,53 +1,42 @@
-//def gv
 
 pipeline {
     agent any
-    parameters {
-        choice(name: 'VERSION', choices: ['1.1.0','1.2.0','1.3.0'], description:'')
-        booleanParam(name: 'executeTests', defaultValue: true, description:'')
+    tools {
+        maven 'maven-3.9'
     }
 
     stages {
-        stage('Build') {
+        stage('build jar') {
           
             steps {
                 script{
-                    def gv = load "script.groovy"
-                    gv.buildApp()
+                    echo "building the application ..."
+                    sh "mvn package"
                 }
             }
         }
-        stage('Test') {
-             when {
-                    expression{
-                        params.executeTests
-                    }
-                }
-            steps {
-                  script{
-                      def gv = load "script.groovy"
-                      gv.testApp()
-                }
-            }  
-        }
-         stage('Deploy') {
-             input{
-                 message "Select environment to deploy to"
-                 ok "Done"
-                 parameters {
-                         choice(name: 'ENV1', choices: ['DEV','STAGING','PROD'], description:'')
-                         choice(name: 'ENV2', choices: ['DEV','STAGING','PROD'], description:'')
-                 }
-             }
+        stage('build image'){
             steps {
                 script{
-                    def gv = load "script.groovy"
+                        echo "building the docker image ..."
+                        withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASS',usernameVariable: 'USER')]) {
+                            sh 'docker build -t njogud/demo-app:jma2.0 .'
+                            sh 'echo $PASS | docker login -u $USER -password-stdin'
+                            sh 'docker push njogud/demo-app:jma2.0'
 
-                    gv.deployApp()
-                    echo "Deploying to ${ENV1}"
-                    echo "Deploying to ${ENV2}"
+                        }
+                        
                 }
-            }
+            }  
+
+        }
+        stage('deploy'){
+             steps {
+                  script{
+                        echo "deploying the application ..."
+                       
+                }
+            }  
         }
     }
 }
