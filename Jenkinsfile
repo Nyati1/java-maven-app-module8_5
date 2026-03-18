@@ -23,10 +23,7 @@ pipeline {
                             sh 'docker build -t njogud/demo-app:jma2.0 .'
                            // sh 'echo $PASS | docker login -u $USER -password-stdin'
                             sh 'docker login -u njogud --password David@123'
-                            sh 'docker push njogud/demo-app:jma2.0'
-
-                        }
-                        
+                            sh 'docker push njogud/demo-app:jma2.0'   
                 }
             }  
 
