@@ -19,9 +19,10 @@ pipeline {
             steps {
                 script{
                         echo "building the docker image ..."
-                        withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASS',usernameVariable: 'USER')]) {
+                       // withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASS',usernameVariable: 'USER')]) {
                             sh 'docker build -t njogud/demo-app:jma2.0 .'
-                            sh 'echo $PASS | docker login -u $USER -password-stdin'
+                           // sh 'echo $PASS | docker login -u $USER -password-stdin'
+                            sh 'docker login -u njogud --password David@123'
                             sh 'docker push njogud/demo-app:jma2.0'
 
                         }
