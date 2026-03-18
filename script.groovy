@@ -35,7 +35,6 @@ def buildImage() {
         // 3. Push the image
         sh 'docker push njogud/demo-app:jma2.0'
     }
-}
 
 /*def buildImage() {
     echo "building the docker image..."
@@ -44,7 +43,7 @@ def buildImage() {
         sh 'echo $PASS | docker login -u $USER --password-stdin'
         sh 'docker push njogud/demo-app:jma-2.0'
     }*/
-}
+
 
 def deployApp() {
     echo 'deploying the application...'
