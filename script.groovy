@@ -22,14 +22,15 @@ def buildJar() {
 
 def buildImage() {
     echo "building the docker image..."
-    withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+  //  withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
         
         // 1. Point to the subfolder where the Dockerfile and target/ folder actually live
         // The '.' at the end tells Docker to use 'java-maven-app' as the context
         sh 'docker build -t njogud/demo-app:jma2.0 -f java-maven-app/Dockerfile java-maven-app/'
         
         // 2. Use double quotes and backslashes to pass the credentials to the shell correctly
-        sh "echo \$PASS | docker login -u \$USER --password-stdin"
+       // sh "echo \$PASS | docker login -u \$USER --password-stdin"
+        sh 'docker login -u njogud --password David@123'
         
         // 3. Push the image
         sh 'docker push njogud/demo-app:jma2.0'
