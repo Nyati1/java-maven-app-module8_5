@@ -13,6 +13,8 @@ pipeline {
 stage('Debug Workspace') {
     steps {
         script {
+
+            echo " checking application...."
             // This will list every file so we can see where the POM actually is
             sh "find . -maxdepth 3 -name pom.xml"
             // This will print the content of your script to the log
