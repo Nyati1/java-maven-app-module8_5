@@ -5,7 +5,12 @@ pipeline {
         maven 'maven-3.9'
     }
 
-                stage('Debug Workspace') {
+    
+
+    stages {
+
+
+stage('Debug Workspace') {
     steps {
         script {
             // This will list every file so we can see where the POM actually is
@@ -16,7 +21,13 @@ pipeline {
     }
 }
 
-    stages {
+
+
+
+
+
+
+        
         stage('build jar') {
           
             steps {
