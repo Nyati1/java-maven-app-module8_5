@@ -9,12 +9,14 @@ pipeline {
         stage('build jar') {
           
             steps {
-                dir('java-maven-app') {
+                
                 script{
                     echo "building the application ..."
-                    sh "mvn package"
+                    def myScript = load 'java-maven-app/script.groovy'
+                    dir('java-maven-app') {
+                        myScript.buildJar()
                 }
-                }
+                
             }
         }
         
