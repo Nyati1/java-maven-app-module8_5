@@ -1,7 +1,7 @@
 def buildJar() {
     echo 'building the application...'
-    // Build the module using the pom.xml in the current directory
-   // sh 'mvn clean package'
+    // Build the module using the pom.xml in the sub-directory
+    // sh 'mvn clean package'
     sh 'mvn -f java-maven-app/pom.xml clean package'
 }
 
@@ -15,17 +15,20 @@ def buildJar() {
         sh 'docker push njogud/demo-app:jma2.0'
     }
 }*/
+
 def buildImage() {
     echo "building and pushing to Nexus..."
     
     // 1. Define your Nexus URL
-    def nexusUrl = "159.203.37.26:8083" // Or your Nexus domain name
+    def nexusUrl = "159.203.37.26:8083" 
     def imageName = "${nexusUrl}/demo-app:jma2.0"
 
     withCredentials([usernamePassword(credentialsId: 'nexus-docker-repo', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
         
-        // 2. Build the image with the Nexus URL in the name
-        sh "docker build -t ${imageName} ."
+        // 2. Build the image
+        // -f points to the Dockerfile path
+        // The final 'java-maven-app/' tells Docker to use that folder as the build context
+        sh "docker build -t ${imageName} -f java-maven-app/Dockerfile java-maven-app/"
         
         // 3. Login to your PRIVATE Nexus server
         sh "echo \$PASS | docker login -u \$USER --password-stdin ${nexusUrl}"
