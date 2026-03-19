@@ -4,14 +4,19 @@ pipeline {
         maven 'maven-3.9'
     }
 
-   stages {
-        stage('Debug Workspace') {
+ stage('Debug Workspace') {
             steps {
                 script {
-                    echo " checking application...."
-                    // This will list every file so we can see where the POM actually is
+                    echo "Checking application structure..."
+                    
+                    // 1. Force the submodule to actually download its files
+                    sh "git submodule update --init --recursive"
+                    
+                    // 2. List the files to confirm they exist now
+                    sh "ls -R" 
+                    
+                    // 3. Now find the POM and print the script
                     sh "find . -maxdepth 3 -name pom.xml"
-                    // This will print the content of your script to the log
                     sh "cat java-maven-app/script.groovy"
                 } 
             } 
