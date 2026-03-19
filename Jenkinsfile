@@ -8,6 +8,7 @@ pipeline {
         stage('build jar') {
             steps {
                 script {
+                    sh "ls -la"
                     echo "building the application ..."
                 
                     def myScript = load 'script.groovy'
