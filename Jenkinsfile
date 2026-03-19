@@ -4,7 +4,8 @@ pipeline {
         maven 'maven-3.9'
     }
 
- stage('Debug Workspace') {
+    stages { // <--- Added this missing block
+        stage('Debug Workspace') {
             steps {
                 script {
                     echo "Checking application structure..."
@@ -60,5 +61,5 @@ pipeline {
                 }
             } 
         }
-    }
-}
+    } 
+} 
