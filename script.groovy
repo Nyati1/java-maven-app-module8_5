@@ -1,7 +1,8 @@
 def buildJar() {
     echo 'building the application...'
     // Build the module using the pom.xml in the current directory
-    sh 'mvn clean package'
+   // sh 'mvn clean package'
+    sh 'mvn -f java-maven-app/pom.xml clean package'
 }
 
 /*def buildImage() {
