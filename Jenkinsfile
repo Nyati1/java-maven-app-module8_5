@@ -5,6 +5,17 @@ pipeline {
         maven 'maven-3.9'
     }
 
+                stage('Debug Workspace') {
+    steps {
+        script {
+            // This will list every file so we can see where the POM actually is
+            sh "find . -maxdepth 3 -name pom.xml"
+            // This will print the content of your script to the log
+            sh "cat java-maven-app/script.groovy"
+        }
+    }
+}
+
     stages {
         stage('build jar') {
           
@@ -19,17 +30,6 @@ pipeline {
             }
         }
 
-            stage('Debug Workspace') {
-    steps {
-        script {
-            // This will list every file so we can see where the POM actually is
-            sh "find . -maxdepth 3 -name pom.xml"
-            // This will print the content of your script to the log
-            sh "cat java-maven-app/script.groovy"
-        }
-    }
-}
-        
         stage('build image'){
             steps {
                script{
