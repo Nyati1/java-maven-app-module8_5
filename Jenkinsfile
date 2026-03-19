@@ -13,10 +13,9 @@ pipeline {
                 script{
                     echo "building the application ..."
                     def myScript = load 'java-maven-app/script.groovy'
-                    dir('java-maven-app') {
-                        myScript.buildJar()
-                }
                 
+                 myScript.buildJar()
+
             }
         }
         
