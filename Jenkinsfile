@@ -9,12 +9,15 @@ pipeline {
         stage('build jar') {
           
             steps {
+                dir('java-maven-app') {
                 script{
                     echo "building the application ..."
                     sh "mvn package"
                 }
+                }
             }
         }
+        
         stage('build image'){
             steps {
                script{
