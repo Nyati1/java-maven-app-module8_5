@@ -4,11 +4,12 @@ pipeline {
         maven 'maven-3.9'
     }
 
+    stages { 
         stage('build jar') {
             steps {
                 script {
                     echo "building the application ..."
-                    // Removed 'java-maven-app/' because files are in the root
+                
                     def myScript = load 'script.groovy'
                     
                     myScript.buildJar()
@@ -43,5 +44,5 @@ pipeline {
                 }
             } 
         }
-    }
+    } 
 }
