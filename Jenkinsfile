@@ -4,7 +4,7 @@ pipeline {
         maven 'maven-3.9'
     }
 
-    stages {
+   /* stages {
         stage('Debug Workspace') {
             steps {
                 script {
@@ -15,7 +15,7 @@ pipeline {
                     sh "cat java-maven-app/script.groovy"
                 } 
             } 
-        }
+        }*/
 
         stage('build jar') {
             steps {
