@@ -20,15 +20,17 @@ pipeline {
 
         stage('build image') {
             steps {
-                 echo "building the docker image ..."
-                /*script {
+                script {
                     echo "building the docker image ..."
-                    echo "building the docker image to nexus..."
-                    def myScript = load 'script.groovy'
-                    
-                    // dir('java-maven-app') {
-                        myScript.buildImage()
-                    // }*/
+                    /*script {
+                        echo "building the docker image ..."
+                        echo "building the docker image to nexus..."
+                        def myScript = load 'script.groovy'
+                        
+                        // dir('java-maven-app') {
+                            myScript.buildImage()
+                        // }
+                    }*/
 
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                         sh 'docker build -t njogud/demo-app:jma2.0 .'
