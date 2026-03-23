@@ -4,28 +4,32 @@ pipeline {
         maven 'maven-3.9'
     }
 
-    stages {
+    stages { 
         stage('build jar') {
             steps {
                 script {
+                    sh "ls -la"
                     echo "building the application ..."
-                    def myScript = load 'java-maven-app/script.groovy'
+                
+                    def myScript = load 'script.groovy'
                     
                     myScript.buildJar()
-                    echo " testing webhook integration..."
                 } 
             } 
         }
 
         stage('build image') {
             steps {
-               /* script {
-                    // echo "building the docker image ..."
-                    echo "building the docker image to nexus..."
-                    def myScript = load 'java-maven-app/script.groovy'
-                    
-                    dir('java-maven-app') {
-                        myScript.buildImage()
+                script {
+                    echo "building the docker image ..."
+                    /*script {
+                        echo "building the docker image ..."
+                        echo "building the docker image to nexus..."
+                        def myScript = load 'script.groovy'
+                        
+                        // dir('java-maven-app') {
+                            myScript.buildImage()
+                        // }
                     }*/
 
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
@@ -44,5 +48,5 @@ pipeline {
                 }
             } 
         }
-    }
+    } 
 }
