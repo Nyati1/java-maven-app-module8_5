@@ -24,7 +24,7 @@ pipeline {
                     echo "building the docker image ..."
                     echo "Testing the webhook...."
                     /*script {
-                        echo "building the docker image ..."
+                        echo "building the docker image ....."
                         echo "building the docker image to nexus..."
                         def myScript = load 'script.groovy'
                         
