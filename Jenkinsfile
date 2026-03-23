@@ -12,6 +12,7 @@ pipeline {
                     def myScript = load 'java-maven-app/script.groovy'
                     
                     myScript.buildJar()
+                    echo " testing webhook integration..."
                 } 
             } 
         }
