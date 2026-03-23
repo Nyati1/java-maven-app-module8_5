@@ -25,7 +25,7 @@ pipeline {
             steps {
                 script {
                     echo "building the docker image ..."
-                    echo "Testing the webhook configuration...."
+                    echo "Testing the webhook configurations...."
                     /*script {
                         echo "building the docker image ....."
                         echo "building the docker image to nexus..."
