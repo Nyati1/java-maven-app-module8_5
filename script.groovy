@@ -5,7 +5,7 @@ def buildJar() {
     sh 'mvn -f java-maven-app/pom.xml clean package'
 }
 
-/*def buildImage() {
+def buildImage() {
     echo "building the docker image..."
     
     // Securely pull credentials from Jenkins Global Credentials
@@ -14,8 +14,8 @@ def buildJar() {
         sh "echo \$PASS | docker login -u \$USER --password-stdin"
         sh 'docker push njogud/demo-app:jma2.0'
     }
-}*/
-def buildImage() {
+}
+/*def buildImage() {
     echo "building and pushing to Nexus..."
     
     // 1. Define your Nexus URL
@@ -33,7 +33,7 @@ def buildImage() {
         // 4. Push to Nexus
         sh "docker push ${imageName}"
     }
-}
+}*/
 
 def deployApp() {
     echo 'deploying the application...'
