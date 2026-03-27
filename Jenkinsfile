@@ -25,7 +25,8 @@ pipeline {
             steps {
                 script {
                     echo "building the docker image ..."
-                    echo "Testing the web--hook configurations...."
+                    echo "Testing the web--hook configurations ...."
+                    echo "Testing the web--hook configurations ...."
                     /*script {
                         echo "building the docker image ....."
                         echo "building the docker image to nexus..."
