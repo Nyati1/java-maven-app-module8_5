@@ -5,14 +5,14 @@ def buildJar() {
     sh 'mvn clean package'
 }
 
-def buildImage() {
+/*def buildImage() {
     echo "building the docker image..."
     withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
         sh 'docker build -t njogud/demo-app:jma2.0 .'
         sh "echo \$PASS | docker login -u \$USER --password-stdin"
         sh 'docker push njogud/demo-app:jma2.0'
     }
-}
+}*/
 
 /*def buildImage() {
     echo "building and pushing to Nexus..."
