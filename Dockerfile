@@ -9,5 +9,5 @@ WORKDIR /usr/app
 COPY ./target/java-maven-app-*.jar .
 
 # 3. Ensure the JAR name here matches the one in your target folder
-// ENTRYPOINT ["java", "-jar", "java-maven-app-1.1.0-SNAPSHOT.jar"]
+# ENTRYPOINT ["java", "-jar", "java-maven-app-1.1.0-SNAPSHOT.jar"]
 CMD java -jar java-maven-app-*.jar
